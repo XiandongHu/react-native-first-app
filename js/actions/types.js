@@ -6,7 +6,7 @@
 
 export type Action =
     { type: 'LOADED_ABOUT', msg: string }
-  | { type: 'LOADED_PLAYERS', list: Array<Object> }
+  | { type: 'LOADED_ALL_PLAYERS', list: Array<Object> }
   ;
 
 export type Dispatch = (action: Action | ThunkAction | PromiseAction | Array<Action>) => any;

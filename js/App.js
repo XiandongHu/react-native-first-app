@@ -7,35 +7,26 @@
 import {
   View,
   StatusBar,
-  Text
+  StyleSheet
 } from 'react-native';
 
-var StyleSheet = require('./common/CMStyleSheet');
-var CMHeader = require('./common/CMHeader');
+var AllPlayersView = require('./tabs/player/AllPlayersView');
 
 var React = require('React');
 var {
   loadAbout,
+  loadAllPlayers,
 } = require('./actions');
 var { connect } = require('react-redux');
-
-var Platform = require('Platform');
 
 var App = React.createClass({
   componentDidMount: function() {
     // TODO: Make this list smaller, we basically download the whole internet
     this.props.dispatch(loadAbout());
+    this.props.dispatch(loadAllPlayers());
   },
 
   render: function() {
-    let leftItem;
-    if (Platform.OS === 'android') {
-      leftItem = {
-        title: 'Menu',
-        icon: require('./common/img/menu.png'),
-      };
-    }
-
     return (
       <View style={styles.container}>
         <StatusBar
@@ -43,16 +34,7 @@ var App = React.createClass({
           backgroundColor="rgba(0, 0, 0, 0.2)"
           barStyle="light-content"
         />
-        <CMHeader
-          style={styles.header}
-          title="Title"
-          leftItem={leftItem}>
-        </CMHeader>
-        <View style={styles.aboutContainer}>
-          <Text style={styles.about}>
-            {this.props.msg}
-          </Text>
-        </View>
+        <AllPlayersView />
       </View>
     );
   },
@@ -62,26 +44,6 @@ var styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  header: {
-    android: {
-      backgroundColor: '#5597B8',
-    },
-  },
-  aboutContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  about: {
-    fontSize: 20,
-    textAlign: 'center',
-  },
 });
 
-function select(store) {
-  return {
-    msg: store.about,
-  };
-}
-
-module.exports = connect(select)(App);
+module.exports = connect()(App);
