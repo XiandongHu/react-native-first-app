@@ -15,7 +15,7 @@ if (currentMonth >= 10) {
 
 const address = {
   allPlayers: () => {
-    return `http://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=${season}`;
+    return `http://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=1&LeagueID=00&Season=${season}`;
   },
 };
 

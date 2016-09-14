@@ -10,7 +10,7 @@ import {
   StyleSheet
 } from 'react-native';
 
-var AllPlayersView = require('./tabs/player/AllPlayersView');
+var PlayersView = require('./tabs/player/PlayersView');
 
 var React = require('React');
 var {
@@ -34,7 +34,7 @@ var App = React.createClass({
           backgroundColor="rgba(0, 0, 0, 0.2)"
           barStyle="light-content"
         />
-        <AllPlayersView />
+        <PlayersView />
       </View>
     );
   },

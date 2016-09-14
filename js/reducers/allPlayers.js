@@ -12,6 +12,7 @@ export type Player = {
   teamId: number;
   teamCity: string;
   teamName: string;
+  teamAbbr: string;
 };
 
 function fromPlayer(player: Object): Player {
@@ -21,6 +22,7 @@ function fromPlayer(player: Object): Player {
     teamId: player.teamId,
     teamCity: player.teamCity,
     teamName: player.teamName,
+    teamAbbr: player.teamAbbr,
   };
 }
 
