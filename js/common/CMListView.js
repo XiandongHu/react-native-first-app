@@ -17,7 +17,7 @@ type RowsAndSections = {
 };
 
 export type Data = Rows | RowsAndSections;
-type RenderElement = () => ?ReactElement;
+type RenderElement = () => ?ReactElement<any>;
 
 type Props = {
   data: Data;
@@ -49,6 +49,7 @@ class CMListView extends React.Component {
 
   constructor(props: Props) {
     super(props);
+
     let dataSource = new ListView.DataSource({
       getRowData: (dataBlob, sid, rid) => dataBlob[sid][rid],
       getSectionHeaderData: (dataBlob, sid) => dataBlob[sid],
@@ -105,7 +106,7 @@ class CMListView extends React.Component {
     return this.refs.listview.getScrollResponder();
   }
 
-  renderFooter(): ?ReactElement {
+  renderFooter(): ?ReactElement<any> {
     if (this.state.dataSource.getRowCount() === 0) {
       return this.props.renderEmptyList && this.props.renderEmptyList();
     }

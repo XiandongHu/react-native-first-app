@@ -10,8 +10,7 @@ import {
   Text
 } from 'react-native';
 
-var StyleSheet = require('../../common/CMStyleSheet');
-var CMHeader = require('../../common/CMHeader');
+var CMListContainer = require('../../common/CMListContainer');
 var CMEmptyView = require('../../common/CMEmptyView');
 var CMListView = require('../../common/CMListView');
 var PlayerCell = require('./PlayerCell');
@@ -41,27 +40,26 @@ class PlayersView extends React.Component {
   }
 
   render() {
-    let leftItem;
-    if (Platform.OS === 'android') {
-      leftItem = {
-        title: 'Menu',
-        icon: require('../../common/img/menu.png'),
-      };
-    }
+    const filterItem = {
+      icon: require('../../common/img/filter.png'),
+      title: 'Filter',
+    };
 
     return (
-      <View style={styles.container}>
-        <CMHeader
-          style={styles.header}
-          title="Title"
-          leftItem={leftItem}>
-        </CMHeader>
+      <CMListContainer
+        title="NBA"
+        selectedSegment={0}
+        backgroundImage={require('./img/player-background.png')}
+        backgroundColor="#5597B8"
+        selectedSectionColor="#51CDDA"
+        rightItem={filterItem}>
         <CMListView
+          title="Players"
           data={this.props.players}
           renderEmptyList={this.renderEmptyList}
           renderRow={this.renderRow}
         />
-      </View>
+      </CMListContainer>
     );
   }
 
@@ -93,17 +91,6 @@ class PlayersView extends React.Component {
     );
   }
 }
-
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    android: {
-      backgroundColor: '#5597B8',
-    },
-  },
-});
 
 function select(store) {
   return {

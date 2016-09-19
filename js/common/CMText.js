@@ -8,15 +8,15 @@ import React from 'react';
 import ReactNative, { StyleSheet, Dimensions } from 'react-native';
 import CMColors from './CMColors';
 
-export function Text({style, ...props}: Object): ReactElement {
+export function Text({style, ...props}: Object): ReactElement<any> {
   return <ReactNative.Text style={[styles.font, style]} {...props} />;
 }
 
-export function Heading1({style, ...props}: Object): ReactElement {
+export function Heading1({style, ...props}: Object): ReactElement<any> {
   return <ReactNative.Text style={[styles.font, styles.h1, style]} {...props} />;
 }
 
-export function Paragraph({style, ...props}: Object): ReactElement {
+export function Paragraph({style, ...props}: Object): ReactElement<any> {
   return <ReactNative.Text style={[styles.font, styles.p, style]} {...props} />;
 }
 

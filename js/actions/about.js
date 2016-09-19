@@ -4,7 +4,7 @@
 
 'use strict';
 
-import type {Action} from './types';
+import type { Action } from './types';
 
 function loadAbout(): Action {
   const msg = 'First React Native App';
