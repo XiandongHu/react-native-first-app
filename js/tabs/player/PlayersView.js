@@ -5,9 +5,8 @@
 'use strict';
 
 import {
-  Alert,
-  View,
-  Text
+  Platform,
+  Alert
 } from 'react-native';
 
 var CMListContainer = require('../../common/CMListContainer');
@@ -19,8 +18,6 @@ var FilterPlayers = require('./filterPlayers');
 
 var React = require('React');
 var { connect } = require('react-redux');
-
-var Platform = require('Platform');
 
 // TODO: Move from reselect to memoize?
 var { createSelector } = require('reselect');
@@ -55,6 +52,12 @@ class PlayersView extends React.Component {
         rightItem={filterItem}>
         <CMListView
           title="Players"
+          data={this.props.players}
+          renderEmptyList={this.renderEmptyList}
+          renderRow={this.renderRow}
+        />
+        <CMListView
+          title="Teams"
           data={this.props.players}
           renderEmptyList={this.renderEmptyList}
           renderRow={this.renderRow}

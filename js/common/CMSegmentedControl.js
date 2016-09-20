@@ -52,7 +52,7 @@ class Segment extends React.Component {
   render() {
     var selectedButtonStyle;
     if (this.props.isSelected) {
-      selectedButtonStyle = { borderColor: this.props.selectionColor };
+      selectedButtonStyle = {borderColor: this.props.selectionColor};
     }
     var deselectedLabelStyle;
     if (!this.props.isSelected && Platform.OS === 'android') {
