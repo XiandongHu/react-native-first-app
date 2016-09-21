@@ -8,7 +8,7 @@ var React = require('React');
 var { Provider } = require('react-redux');
 
 var configureStore = require('./store/configureStore');
-var App = require('./App');
+var NBAApp = require('./NBAApp');
 
 function setup(): ReactClass<{}> {
   console.disableYellowBox = true;
@@ -35,7 +35,7 @@ function setup(): ReactClass<{}> {
 
       return (
         <Provider store={this.state.store}>
-          <App />
+          <NBAApp />
         </Provider>
       )
     }

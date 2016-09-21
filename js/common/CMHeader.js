@@ -15,7 +15,7 @@ var Platform = require('Platform');
 var TouchableOpacity = require('TouchableOpacity');
 var ToolbarAndroid = require('ToolbarAndroid');
 
-var CMColors = require('./CMColors');
+var Colors = require('./CMColors');
 var { Text } = require('./CMText');
 
 export type Layout =
@@ -65,7 +65,7 @@ class CMHeaderAndroid extends React.Component {
     }
 
     const textColor = this.props.foreground === 'dark'
-      ? CMColors.darkText
+      ? Colors.darkText
       : 'white';
 
     let content;
@@ -110,8 +110,8 @@ class CMHeaderIOS extends React.Component {
 
   render() {
     const { leftItem, title, rightItem, foreground } = this.props;
-    const titleColor = foreground === 'dark' ? CMColors.darkText : 'white';
-    const itemsColor = foreground === 'dark' ? CMColors.lightText : 'white';
+    const titleColor = foreground === 'dark' ? Colors.darkText : 'white';
+    const itemsColor = foreground === 'dark' ? Colors.lightText : 'white';
 
     const content = React.Children.count(this.props.children) === 0
       ? <Text style={[styles.titleText, {color: titleColor}]}>

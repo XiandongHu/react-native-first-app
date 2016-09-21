@@ -8,7 +8,7 @@ var StyleSheet = require('StyleSheet');
 var TouchableHighlight = require('TouchableHighlight');
 var View = require('View');
 
-var CMColors = require('../../common/CMColors');
+var Colors = require('../../common/CMColors');
 var { Text } = require('../../common/CMText');
 
 import type { Player } from '../../reducers/allPlayers';
@@ -55,11 +55,11 @@ var styles = StyleSheet.create({
     alignItems: 'center',
   },
   teamName: {
-    color: CMColors.lightText,
+    color: Colors.lightText,
     fontSize: 12,
   },
   teamCity: {
-    color: CMColors.lightText,
+    color: Colors.lightText,
     fontSize: 10,
     marginLeft: 3,
   },

@@ -15,9 +15,9 @@ var { connect } = require('react-redux');
 // TODO: Move from reselect to memoize?
 var { createSelector } = require('reselect');
 
-var CMListContainer = require('../../common/CMListContainer');
-var CMEmptyView = require('../../common/CMEmptyView');
-var CMListView = require('../../common/CMListView');
+var ListContainer = require('../../common/CMListContainer');
+var EmptyView = require('../../common/CMEmptyView');
+var ListView = require('../../common/CMListView');
 var PlayerCell = require('./PlayerCell');
 var FilterPlayers = require('./filterPlayers');
 
@@ -26,7 +26,7 @@ const data = createSelector(
   (allPlayers) => FilterPlayers.byTeamAbbr(allPlayers, ['LAL', 'GSW']),
 );
 
-class PlayersView extends React.Component {
+class ScheduleView extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,32 +42,32 @@ class PlayersView extends React.Component {
     };
 
     return (
-      <CMListContainer
-        title="NBA"
+      <ListContainer
+        title="Schedule"
         selectedSegment={0}
-        backgroundImage={require('./img/player-background.png')}
-        backgroundColor="#5597B8"
-        selectedSectionColor="#51CDDA"
+        backgroundImage={require('./img/schedule-background.png')}
+        backgroundColor={'#5597B8'}
+        selectedSectionColor={'#51CDDA'}
         rightItem={filterItem}>
-        <CMListView
+        <ListView
           title="Players"
           data={this.props.players}
           renderEmptyList={this.renderEmptyList}
           renderRow={this.renderRow}
         />
-        <CMListView
+        <ListView
           title="Teams"
           data={this.props.players}
           renderEmptyList={this.renderEmptyList}
           renderRow={this.renderRow}
         />
-      </CMListContainer>
+      </ListContainer>
     );
   }
 
   renderEmptyList() {
     return (
-      <CMEmptyView
+      <EmptyView
         title="No Players Yet"
         text="All Players will appear here after loaded"
       />
@@ -101,4 +101,4 @@ function select(store) {
   };
 }
 
-module.exports = connect(select)(PlayersView);
+module.exports = connect(select)(ScheduleView);

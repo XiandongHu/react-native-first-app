@@ -10,7 +10,6 @@ function about(state: string = '', action: Action): string {
   if (action.type === 'LOADED_ABOUT') {
     return action.msg || state;
   }
-
   return state;
 }
 

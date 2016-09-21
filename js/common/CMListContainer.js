@@ -14,9 +14,9 @@ var Platform = require('Platform');
 
 var StyleSheet = require('./CMStyleSheet');
 var { Text } = require('./CMText');
-var CMHeader = require('./CMHeader');
-var CMSegmentedControl = require('./CMSegmentedControl');
-var CMParallaxBackground = require('./CMParallaxBackground');
+var Header = require('./CMHeader');
+var SegmentedControl = require('./CMSegmentedControl');
+var ParallaxBackground = require('./CMParallaxBackground');
 var ViewPager = require('./CMViewPager');
 
 import type { Item as HeaderItem } from './CMHeader';
@@ -105,7 +105,7 @@ class CMListContainer extends React.Component {
     if (segments.length > 1) {
       stickyHeader = (
         <View>
-          <CMSegmentedControl
+          <SegmentedControl
             values={segments}
             selectedIndex={this.state.idx}
             selectionColor={this.props.selectedSectionColor}
@@ -122,22 +122,22 @@ class CMListContainer extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.headerWrapper}>
-          <CMParallaxBackground
-            minHeight={this.state.stickyHeaderHeight + CMHeader.height}
-            maxHeight={EMPTY_CELL_HEIGHT + this.state.stickyHeaderHeight + CMHeader.height}
+          <ParallaxBackground
+            minHeight={this.state.stickyHeaderHeight + Header.height}
+            maxHeight={EMPTY_CELL_HEIGHT + this.state.stickyHeaderHeight + Header.height}
             offset={this.state.anim}
             backgroundImage={this.props.backgroundImage}
             backgroundShift={backgroundShift}
             backgroundColor={this.props.backgroundColor}>
             {this.renderParallaxContent()}
-          </CMParallaxBackground>
-          <CMHeader
+          </ParallaxBackground>
+          <Header
             title={this.props.title}
             leftItem={leftItem}
             rightItem={this.props.rightItem}
             extraItems={this.props.extraItems}>
             {this.renderHeaderTitle()}
-          </CMHeader>
+          </Header>
           {this.renderFixedStickyHeader(stickyHeader)}
         </View>
         <ViewPager
@@ -333,7 +333,7 @@ var styles = StyleSheet.create({
   },
   stickyHeader: {
     position: 'absolute',
-    top: CMHeader.height,
+    top: Header.height,
     left: 0,
     right: 0,
   },

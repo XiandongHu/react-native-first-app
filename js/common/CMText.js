@@ -7,7 +7,7 @@
 import React from 'react';
 import ReactNative, { StyleSheet, Dimensions } from 'react-native';
 
-import CMColors from './CMColors';
+import Colors from './CMColors';
 
 export function Text({style, ...props}: Object): ReactElement<any> {
   return <ReactNative.Text style={[styles.font, style]} {...props} />;
@@ -31,13 +31,13 @@ const styles = StyleSheet.create({
   h1: {
     fontSize: normalize(24),
     lineHeight: normalize(27),
-    color: CMColors.darkText,
+    color: Colors.darkText,
     fontWeight: 'bold',
     letterSpacing: -1,
   },
   p: {
     fontSize: normalize(15),
     lineHeight: normalize(23),
-    color: CMColors.lightText,
+    color: Colors.lightText,
   },
 });
