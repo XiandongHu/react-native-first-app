@@ -8,12 +8,12 @@ import { applyMiddleware, createStore } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import thunk from 'redux-thunk';
 
+var { AsyncStorage } = require('react-native');
+var createLogger = require('redux-logger');
+
 var promise = require('./promise');
 var array = require('./array');
 var reducers = require('../reducers');
-var createLogger = require('redux-logger');
-
-var { AsyncStorage } = require('react-native');
 
 var isDebuggingInChrome = __DEV__ && !!window.navigator.userAgent;
 

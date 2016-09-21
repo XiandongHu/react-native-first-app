@@ -4,9 +4,8 @@
 
 'use strict';
 
-import type { ThunkAction } from './types';
-
 import channel from '../channel';
+import type { ThunkAction } from './types';
 
 module.exports = {
   loadAllPlayers: (): ThunkAction => {

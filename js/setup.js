@@ -4,11 +4,11 @@
 
 'use strict';
 
-var App = require('./App');
-
 var React = require('React');
 var { Provider } = require('react-redux');
+
 var configureStore = require('./store/configureStore');
+var App = require('./App');
 
 function setup(): ReactClass<{}> {
   console.disableYellowBox = true;
@@ -21,6 +21,7 @@ function setup(): ReactClass<{}> {
 
     constructor() {
       super();
+
       this.state = {
         isLoading: true,
         store: configureStore(() => this.setState({isLoading: false})),

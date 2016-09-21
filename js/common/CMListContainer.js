@@ -287,7 +287,7 @@ class CMListContainer extends React.Component {
 
   handleSelectSegment(idx: number) {
     if (this.state.idx !== idx) {
-      const {onSegmentChange} = this.props;
+      const { onSegmentChange } = this.props;
       this.setState({idx}, () => onSegmentChange && onSegmentChange(idx));
     }
   }

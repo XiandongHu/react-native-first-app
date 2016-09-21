@@ -10,14 +10,14 @@ import {
   StyleSheet
 } from 'react-native';
 
-var PlayersView = require('./tabs/player/PlayersView');
-
 var React = require('React');
+var { connect } = require('react-redux');
+
 var {
   loadAbout,
   loadAllPlayers,
 } = require('./actions');
-var { connect } = require('react-redux');
+var PlayersView = require('./tabs/player/PlayersView');
 
 var App = React.createClass({
   componentDidMount: function() {

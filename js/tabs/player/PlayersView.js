@@ -9,18 +9,17 @@ import {
   Alert
 } from 'react-native';
 
-var CMListContainer = require('../../common/CMListContainer');
-var CMEmptyView = require('../../common/CMEmptyView');
-var CMListView = require('../../common/CMListView');
-var PlayerCell = require('./PlayerCell');
-
-var FilterPlayers = require('./filterPlayers');
-
 var React = require('React');
 var { connect } = require('react-redux');
 
 // TODO: Move from reselect to memoize?
 var { createSelector } = require('reselect');
+
+var CMListContainer = require('../../common/CMListContainer');
+var CMEmptyView = require('../../common/CMEmptyView');
+var CMListView = require('../../common/CMListView');
+var PlayerCell = require('./PlayerCell');
+var FilterPlayers = require('./filterPlayers');
 
 const data = createSelector(
   (store) => store.allPlayers,

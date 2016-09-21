@@ -10,13 +10,13 @@ import {
   Image
 } from 'react-native';
 
-var CMColors = require('./CMColors');
-var { Text } = require('./CMText');
-
 var React = require('React');
 var Platform = require('Platform');
 var TouchableOpacity = require('TouchableOpacity');
 var ToolbarAndroid = require('ToolbarAndroid');
+
+var CMColors = require('./CMColors');
+var { Text } = require('./CMText');
 
 export type Layout =
     'default'      // Use platform defaults (icon on Android, text on iOS)
@@ -220,7 +220,7 @@ var styles = StyleSheet.create({
   },
 });
 
-const Header = Platform.OS === 'ios' ? CMHeaderIOS : CMHeaderAndroid;
-Header.height = HEADER_HEIGHT;
+const CMHeader = Platform.OS === 'ios' ? CMHeaderIOS : CMHeaderAndroid;
+CMHeader.height = HEADER_HEIGHT;
 
-module.exports = Header;
+module.exports = CMHeader;

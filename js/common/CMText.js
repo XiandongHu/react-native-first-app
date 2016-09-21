@@ -6,6 +6,7 @@
 
 import React from 'react';
 import ReactNative, { StyleSheet, Dimensions } from 'react-native';
+
 import CMColors from './CMColors';
 
 export function Text({style, ...props}: Object): ReactElement<any> {

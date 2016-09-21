@@ -43,7 +43,7 @@ class CMListView extends React.Component {
     data: [],
     // TODO: This has to be scrollview height + fake header
     minContentHeight: Dimensions.get('window').height + 20,
-    contentInset: { top: 0, bottom: 0 },
+    contentInset: {top: 0, bottom: 0},
     renderSeparator: (sectionID, rowID) => <View style={styles.separator} key={rowID} />,
   };
 
