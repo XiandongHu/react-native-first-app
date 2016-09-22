@@ -1,4 +1,5 @@
 /**
+ * @providesModule NBATabsView
  * @flow
  */
 
@@ -37,8 +38,8 @@ class NBATabsView extends React.Component {
   constructor(props) {
     super(props);
 
-    this.renderNavigationView = this.renderNavigationView.bind(this);
-    this.openDrawer = this.openDrawer.bind(this);
+    (this: any).renderNavigationView = this.renderNavigationView.bind(this);
+    (this: any).openDrawer = this.openDrawer.bind(this);
   }
 
   render() {
@@ -75,7 +76,6 @@ class NBATabsView extends React.Component {
           title="Today"
           selected={this.props.tab === 'today'}
           onPress={this.onTabSelect.bind(this, 'today')}
-          badge={this.props.notificationsBadge}
           icon={require('./today/img/today-icon.png')}
           selectedIcon={require('./today/img/today-icon-active.png')}
         />

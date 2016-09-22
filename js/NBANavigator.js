@@ -11,7 +11,7 @@ var BackAndroid = require('BackAndroid');
 var StyleSheet = require('StyleSheet');
 var { connect } = require('react-redux');
 
-var NBATabsView = require('./tabs/NBATabsView');
+var NBATabsView = require('NBATabsView');
 var { switchTab } = require('./actions');
 
 var NBANavigator = React.createClass({

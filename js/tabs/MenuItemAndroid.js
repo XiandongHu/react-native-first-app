@@ -19,7 +19,7 @@ class MenuItemAndroid extends React.Component {
     selectedIcon: number;
     selected: boolean;
     title: string;
-    badge: ?string;
+    badge?: ?string;
     onPress: () => void;
   };
 
