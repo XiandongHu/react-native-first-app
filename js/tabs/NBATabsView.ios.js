@@ -18,6 +18,7 @@ var TodayView = require('./today/TodayView');
 var ScheduleView = require('./schedule/ScheduleView');
 var CommunityView = require('./community/CommunityView');
 var SettingView = require('./setting/SettingView');
+var PlaygroundView = require('./playground/PlaygroundView');
 
 var { switchTab } = require('../actions');
 
@@ -64,6 +65,14 @@ class NBATabsView extends React.Component {
           icon={require('./setting/img/setting-icon.png')}
           selectedIcon={require('./setting/img/setting-icon-active.png')}>
           <SettingView navigator={this.props.navigator} />
+        </TabBarItemIOS>
+        <TabBarItemIOS
+          title="Playground"
+          selected={this.props.tab === 'playground'}
+          onPress={this.onTabSelect.bind(this, 'playground')}
+          icon={require('./setting/img/setting-icon.png')}
+          selectedIcon={require('./setting/img/setting-icon-active.png')}>
+          <PlaygroundView />
         </TabBarItemIOS>
       </TabBarIOS>
     );

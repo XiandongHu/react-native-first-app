@@ -4,7 +4,7 @@
 
 'use strict';
 
-export type Tab = 'today' | 'schedule' | 'community' | 'setting';
+export type Tab = 'today' | 'schedule' | 'community' | 'setting' | 'playground';
 
 export type Action =
     { type: 'LOADED_ABOUT', msg: string }

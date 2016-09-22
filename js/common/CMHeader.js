@@ -222,5 +222,67 @@ var styles = StyleSheet.create({
 
 const CMHeader = Platform.OS === 'ios' ? CMHeaderIOS : CMHeaderAndroid;
 CMHeader.height = HEADER_HEIGHT;
+// $FlowFixMe
+CMHeader.__cards__ = (define) => {
+  const menuItem = {
+    title: 'Menu',
+    icon: require('./img/menu.png'),
+    onPress: () => alert('Menu button pressed!'),
+  };
+  const filterItem = {
+    title: 'Filter',
+    icon: require('./img/filter.png'),
+    onPress: () => alert('Filter button pressed!'),
+  };
+
+  define('Simple', () => <CMHeader title="Hello, world" />);
+  define('With items', () => (
+    <CMHeader
+      title="Default"
+      leftItem={menuItem}
+      rightItem={filterItem}
+    />
+  ));
+  define('Forcing icons', () => (
+    <CMHeader
+      title="Forcing icons"
+      leftItem={{...menuItem, layout: 'icon'}}
+      rightItem={{...filterItem, layout: 'icon'}}
+    />
+  ));
+  define('Forcing title', () => (
+    <CMHeader
+      title="Forcing title"
+      leftItem={{...menuItem, layout: 'title'}}
+      rightItem={{...filterItem, layout: 'title'}}
+    />
+  ));
+  define('With content', () => (
+    <CMHeader leftItem={menuItem}>
+      <View style={{backgroundColor: '#224488'}}>
+        <Text style={{color: 'yellow'}}>
+          Yellow text as title
+        </Text>
+      </View>
+    </CMHeader>
+  ));
+  define('With Background', () => (
+    <CMHeader
+      title="With Background"
+      leftItem={{...menuItem, layout: 'title'}}
+      rightItem={{...filterItem, layout: 'title'}}
+      style={{backgroundColor: '#224488'}}
+    />
+  ));
+  define('With light background', () => (
+    <CMHeader
+      title="Light Background"
+      leftItem={{...menuItem, layout: 'title'}}
+      rightItem={{...filterItem, layout: 'title'}}
+      style={{backgroundColor: 'white'}}
+      foreground="dark"
+    />
+  ));
+};
 
 module.exports = CMHeader;

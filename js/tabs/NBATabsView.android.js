@@ -23,6 +23,7 @@ var TodayView = require('./today/TodayView');
 var ScheduleView = require('./schedule/ScheduleView');
 var CommunityView = require('./community/CommunityView');
 var SettingView = require('./setting/SettingView');
+var PlaygroundView = require('./playground/PlaygroundView');
 
 var { switchTab } = require('../actions');
 
@@ -57,11 +58,11 @@ class NBATabsView extends React.Component {
   }
 
   renderNavigationView() {
-    var profile = (
+    var logo = (
       <View>
         <Image source={require('./img/logo.png')} />
         <Text style={styles.name}>
-          This is why we play!
+          THIS IS WHY WE PLAY
         </Text>
       </View>
     );
@@ -70,7 +71,7 @@ class NBATabsView extends React.Component {
         <Image
           style={styles.header}
           source={require('./img/drawer-header.png')}>
-          {profile}
+          {logo}
         </Image>
         <MenuItemAndroid
           title="Today"
@@ -100,6 +101,13 @@ class NBATabsView extends React.Component {
           icon={require('./setting/img/setting-icon.png')}
           selectedIcon={require('./setting/img/setting-icon-active.png')}
         />
+        <MenuItemAndroid
+          title="Playground"
+          selected={this.props.tab === 'playground'}
+          onPress={this.onTabSelect.bind(this, 'playground')}
+          icon={require('./setting/img/setting-icon.png')}
+          selectedIcon={require('./setting/img/setting-icon-active.png')}
+        />
       </View>
     );
   }
@@ -114,6 +122,8 @@ class NBATabsView extends React.Component {
         return <CommunityView navigator={this.props.navigator} />;
       case 'setting':
         return <SettingView navigator={this.props.navigator} />;
+      case 'playground':
+        return <PlaygroundView />;
     }
     throw new Error(`Unknown tab ${this.props.tab}`);
   }
