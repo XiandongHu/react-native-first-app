@@ -7,7 +7,7 @@
 
 var React = require('React');
 var Navigator = require('Navigator');
-var StatusBarIOS = require('StatusBarIOS');
+var StatusBar = require('StatusBar');
 var TabBarIOS = require('TabBarIOS');
 var TabBarItemIOS = require('TabBarItemIOS');
 var { connect } = require('react-redux');
@@ -79,7 +79,7 @@ class NBATabsView extends React.Component {
   }
 
   componentDidMount() {
-    StatusBarIOS && StatusBarIOS.setStyle('light-content');
+    StatusBar.setBarStyle('light-content');
   }
 
   onTabSelect(tab: Tab) {
@@ -91,7 +91,7 @@ class NBATabsView extends React.Component {
 
 function select(store) {
   return {
-    tab: store.navigation.tab,
+    tab: store.navigation,
   };
 }
 
