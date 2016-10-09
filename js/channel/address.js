@@ -14,6 +14,10 @@ if (currentMonth >= 10) {
 }
 
 const address = {
+  games: (date: string) => {
+    return `http://data.nba.com/data/5s/json/cms/noseason/scoreboard/${date}/games.json`;
+  },
+
   allPlayers: () => {
     return `http://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=1&LeagueID=00&Season=${season}`;
   },
