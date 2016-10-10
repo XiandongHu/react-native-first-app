@@ -30,7 +30,7 @@ const producer = {
       switch (parseInt(process.game_status, 10)) {
         case 1:
           item.status = "unstart";
-          item.date = process.period_status;
+          item.progress = process.period_status;
           result.unstart.push(item);
           break;
         case 2:
@@ -39,7 +39,7 @@ const producer = {
           if (process.game_clock) {
             clock = (parseInt(process.game_clock.split(':')[0], 10) < 10 ? '0' : '') + process.game_clock;
           }
-          item.clock = clock || 'End';
+          item.progress = clock || 'End';
           item.quarter = 'Q' + process.period_value;
           result.live.push(item);
           break;

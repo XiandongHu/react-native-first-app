@@ -13,6 +13,7 @@
     "redux-logger": "~2.6.1",
     "redux-persist": "~3.2.2",
     "redux-thunk": "~2.1.0",
-    "reselect": "~2.5.1"
+    "reselect": "~2.5.1",
+    "moment-timezone": "^0.4.1"
   }
 }

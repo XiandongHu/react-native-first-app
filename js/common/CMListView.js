@@ -23,6 +23,7 @@ type Props = {
   data: Data;
   minContentHeight: number;
   contentInset: { top: number; bottom: number; };
+  needSeparator: boolean;
   renderEmptyList?: ?RenderElement;
 };
 
@@ -44,7 +45,7 @@ class CMListView extends React.Component {
     // TODO: This has to be scrollview height + fake header
     minContentHeight: Dimensions.get('window').height + 20,
     contentInset: {top: 0, bottom: 0},
-    renderSeparator: (sectionID, rowID) => <View style={styles.separator} key={rowID} />,
+    needSeparator: true,
   };
 
   constructor(props: Props) {
@@ -62,6 +63,7 @@ class CMListView extends React.Component {
       dataSource: cloneWithData(dataSource, props.data),
     };
 
+    (this: any).renderSeparator = this.renderSeparator.bind(this);
     (this: any).renderFooter = this.renderFooter.bind(this);
     (this: any).onContentSizeChange = this.onContentSizeChange.bind(this);
   }
@@ -85,6 +87,7 @@ class CMListView extends React.Component {
         pageSize={LIST_VIEW_PAGE_SIZE}
         {...this.props}
         dataSource={this.state.dataSource}
+        renderSeparator={this.renderSeparator}
         renderFooter={this.renderFooter}
         contentInset={{bottom, top: contentInset.top}}
         onContentSizeChange={this.onContentSizeChange}
@@ -104,6 +107,14 @@ class CMListView extends React.Component {
 
   getScrollResponder(): any {
     return this.refs.listview.getScrollResponder();
+  }
+
+  renderSeparator(sectionID, rowID): ?ReactElement<any> {
+    if (this.props.needSeparator) {
+      return <View style={styles.separator} key={rowID} />;
+    }
+
+    return null;
   }
 
   renderFooter(): ?ReactElement<any> {

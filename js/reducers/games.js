@@ -17,8 +17,7 @@ export type Team = {
 export type Game = {
   id: string;
   status: Status;
-  date: string;
-  clock: string;
+  progress: string;
   quarter: string;
   home: Team;
   visitor: Team;
@@ -40,21 +39,20 @@ const initialState: Games = {
 
 function fromTeam(team: Object): Team {
   return {
-    id: team.get('id'),
-    key: team.get('key'),
-    score: team.get('score'),
+    id: team.id,
+    key: team.key,
+    score: team.score,
   };
 }
 
 function fromGame(game: Object): Game {
   return {
-    id: game.get('id'),
-    status: game.get('status'),
-    date: game.get('date'),
-    clock: game.get('clock'),
-    quarter: game.get('quarter'),
-    home: fromTeam(game.get('home')),
-    visitor: fromTeam(game.get('visitor')),
+    id: game.id,
+    status: game.status,
+    progress: game.progress,
+    quarter: game.quarter,
+    home: fromTeam(game.home),
+    visitor: fromTeam(game.visitor),
   };
 }
 
