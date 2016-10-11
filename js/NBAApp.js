@@ -14,22 +14,27 @@ var React = require('React');
 var AppState = require('AppState');
 var { connect } = require('react-redux');
 
+var LoginScreen = require('./login/LoginScreen');
+var NBANavigator = require('./NBANavigator');
+
 var {
   loadAbout,
   loadAllPlayers,
 } = require('./actions');
-var NBANavigator = require('./NBANavigator');
 
 var NBAApp = React.createClass({
   render: function() {
+    const { isLoggedIn } = this.props;
+    let barStyle = !isLoggedIn ? 'default' : 'light-content';
+    let content = !isLoggedIn ? <LoginScreen /> : <NBANavigator />;
     return (
       <View style={styles.container}>
         <StatusBar
           translucent={true}
           backgroundColor="rgba(0, 0, 0, 0.2)"
-          barStyle="light-content"
+          barStyle={barStyle}
         />
-        <NBANavigator />
+        {content}
       </View>
     );
   },
@@ -59,4 +64,10 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = connect()(NBAApp);
+function select(store) {
+  return {
+    isLoggedIn: store.user.isLoggedIn || store.user.hasSkippedLogin,
+  };
+}
+
+module.exports = connect(select)(NBAApp);

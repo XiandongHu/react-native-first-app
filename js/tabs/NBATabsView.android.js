@@ -13,11 +13,12 @@ var Image = require('Image');
 var TouchableOpacity = require('TouchableOpacity');
 var { connect } = require('react-redux');
 
-var Colors = require('../common/CMColors');
+var CMColors = require('../common/CMColors');
 var { Text } = require('../common/CMText');
 var DrawerLayout = require('../common/CMDrawerLayout');
 
 var MenuItemAndroid = require('./MenuItemAndroid');
+var LoginButton = require('../login/LoginButton');
 
 var TodayView = require('./today/TodayView');
 var ScheduleView = require('./schedule/ScheduleView');
@@ -58,7 +59,7 @@ class NBATabsView extends React.Component {
   }
 
   renderNavigationView() {
-    var logo = (
+    var accountItem = (
       <View>
         <Image source={require('./img/logo.png')} />
         <Text style={styles.name}>
@@ -66,12 +67,20 @@ class NBATabsView extends React.Component {
         </Text>
       </View>
     );
+    var loginItem = (
+      <View style={styles.loginPrompt}>
+        <Text style={styles.loginText}>
+          Log in to find your friends at F8.
+        </Text>
+        <LoginButton onPress={this.onLogin.bind(this)} />
+      </View>
+    );
     return (
       <View style={styles.drawer}>
         <Image
           style={styles.header}
           source={require('./img/drawer-header.png')}>
-          {logo}
+          {accountItem}
         </Image>
         <MenuItemAndroid
           title="Today"
@@ -108,6 +117,7 @@ class NBATabsView extends React.Component {
           icon={require('./setting/img/setting-icon.png')}
           selectedIcon={require('./setting/img/setting-icon-active.png')}
         />
+        {loginItem}
       </View>
     );
   }
@@ -139,6 +149,14 @@ class NBATabsView extends React.Component {
     this.refs.drawer.closeDrawer();
   }
 
+  onLogin() {
+    this.refs.drawer.closeDrawer();
+    this.props.navigator.push({
+      login: true, // TODO: Proper route
+      callback: null,
+    });
+  }
+
   getChildContext() {
     return {
       openDrawer: this.openDrawer,
@@ -166,6 +184,17 @@ var styles = StyleSheet.create({
     marginTop: 10,
     color: 'white',
     fontSize: 12,
+  },
+  loginPrompt: {
+    flex: 1,
+    paddingBottom: 10,
+    justifyContent: 'flex-end',
+  },
+  loginText: {
+    marginBottom: 10,
+    color: CMColors.lightText,
+    fontSize: 12,
+    textAlign: 'center',
   },
 });
 

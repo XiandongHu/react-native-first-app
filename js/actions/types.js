@@ -8,6 +8,7 @@ export type Tab = 'today' | 'schedule' | 'community' | 'setting' | 'playground';
 
 export type Action =
     { type: 'LOADED_ABOUT', msg: string }
+  | { type: 'SKIPPED_LOGIN' }
   | { type: 'LOADED_GAMES', games: Object }
   | { type: 'LOADED_ALL_PLAYERS', list: Array<Object> }
   | { type: 'SWITCH_TAB', tab: Tab }

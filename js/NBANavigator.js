@@ -12,6 +12,8 @@ var StyleSheet = require('StyleSheet');
 var { connect } = require('react-redux');
 
 var NBATabsView = require('NBATabsView');
+var LoginModal = require('./login/LoginModal');
+
 var { switchTab } = require('./actions');
 
 var NBANavigator = React.createClass({
@@ -40,6 +42,15 @@ var NBANavigator = React.createClass({
   },
 
   renderScene: function(route, navigator) {
+    if (route.login) {
+      return (
+        <LoginModal
+          navigator={navigator}
+          onLogin={route.callback}
+        />
+      );
+    }
+
     return <NBATabsView navigator={navigator} />;
   },
 
