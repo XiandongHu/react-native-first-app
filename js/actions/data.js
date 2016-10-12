@@ -18,6 +18,16 @@ module.exports = {
     };
   },
 
+  loadGameDetail: (year: string, month: string, day: string, id: string): ThunkAction => {
+    return (dispatch) => {
+      channel.loadGameDetail(year, month, day, id)
+        .then(data => {
+          dispatch(({type: 'LOADED_GAME_DETAIL', detail: data}: any));
+        })
+        .catch(err => console.error(err));
+    };
+  },
+
   loadAllPlayers: (): ThunkAction => {
     return (dispatch) => {
       channel.loadAllPlayers()

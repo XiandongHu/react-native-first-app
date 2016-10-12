@@ -55,6 +55,32 @@ const producer = {
     return result;
   },
 
+  gameDetail: (res: any) => {
+    let result = {
+      status: '',
+      home: {},
+      visitor: {},
+    };
+
+    const data = res.sports_content.game;
+    Object.keys(result).forEach((key) => {
+      result[key]['key'] = data[key]['team_key'];
+      result[key]['score'] = data[key]['score'];
+      result[key]['periods'] = data[key]['linescores']['period'];
+      result[key]['players'] = data[key]['players']['player'];
+    });
+
+    const process = game['period_time'];
+    const type = parseInt(process.game_status, 10);
+    result.status = type === 3 ? 'over' : (type === 2 ? 'live' : 'unstart');
+    if (result.status === 'live') {
+      result.progress = process.game_clock || 'End';
+      result.quarter = 'Q' + process.period_value;
+    }
+
+    return result;
+  },
+
   allPlayers: (res: any) => {
     const data = res.resultSets[0].rowSet;
 

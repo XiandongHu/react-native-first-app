@@ -18,6 +18,10 @@ const address = {
     return `http://data.nba.com/data/5s/json/cms/noseason/scoreboard/${date}/games.json`;
   },
 
+  gameDetail: (date: string, id: string) => {
+    return `http://data.nba.com/data/10s/json/cms/noseason/game/${date}/${id}/boxscore.json`;
+  },
+
   allPlayers: () => {
     return `http://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=1&LeagueID=00&Season=${season}`;
   },
