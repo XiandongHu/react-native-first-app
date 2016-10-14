@@ -10,7 +10,6 @@ var StyleSheet = require('StyleSheet');
 var Navigator = require('Navigator');
 var View = require('View');
 var Image = require('Image');
-var TouchableOpacity = require('TouchableOpacity');
 var { connect } = require('react-redux');
 
 var CMColors = require('../common/CMColors');

@@ -37,7 +37,7 @@ function setup(): ReactClass<{}> {
         <Provider store={this.state.store}>
           <NBAApp />
         </Provider>
-      )
+      );
     }
   }
 

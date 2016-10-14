@@ -2,7 +2,7 @@
  * @flow
  */
 
-'use strict'
+'use strict';
 
 const aboutActions = require('./about');
 const loginActions = require('./login');

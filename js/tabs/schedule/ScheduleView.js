@@ -4,12 +4,8 @@
 
 'use strict';
 
-import {
-  Platform,
-  Alert
-} from 'react-native';
-
 var React = require('React');
+var { Alert } = require('react-native');
 var { connect } = require('react-redux');
 
 // TODO: Move from reselect to memoize?

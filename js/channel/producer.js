@@ -29,7 +29,7 @@ const producer = {
       const process = game['period_time'];
       switch (parseInt(process.game_status, 10)) {
         case 1:
-          item.status = "unstart";
+          item.status = 'unstart';
           item.progress = process.period_status;
           result.unstart.push(item);
           break;
@@ -70,7 +70,7 @@ const producer = {
       result[key]['players'] = data[key]['players']['player'];
     });
 
-    const process = game['period_time'];
+    const process = data['period_time'];
     const type = parseInt(process.game_status, 10);
     result.status = type === 3 ? 'over' : (type === 2 ? 'live' : 'unstart');
     if (result.status === 'live') {

@@ -2,7 +2,7 @@
  * @flow
  */
 
-'use strict'
+'use strict';
 
 module.exports =  {
   atl: {

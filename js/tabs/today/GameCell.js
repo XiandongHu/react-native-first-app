@@ -16,7 +16,7 @@ import {
 var StyleSheet = require('../../common/CMStyleSheet');
 var TeamMap = require('../../utils/teamMap');
 
-import type { Status, Game } from '../../reducers/games';
+import type { Game } from '../../reducers/games';
 
 class GameCell extends React.Component {
   props: {
