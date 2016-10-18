@@ -23,7 +23,11 @@ const channel = {
     const url = address.gameDetail(`${year}${month}${day}`, id);
     return window.fetch(url)
       .then(res => res.json())
-      .then(res => producer.gameDetail(res));
+      .then(res => {
+        const detail = producer.gameDetail(res);
+        detail.id = `${id}`;
+        return detail;
+      });
   },
 
   loadAllPlayers: () => {

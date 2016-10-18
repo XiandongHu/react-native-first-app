@@ -57,7 +57,6 @@ const producer = {
 
   gameDetail: (res: any) => {
     let result = {
-      status: '',
       home: {},
       visitor: {},
     };

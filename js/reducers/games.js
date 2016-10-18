@@ -21,6 +21,7 @@ export type Game = {
   quarter: string;
   home: Team;
   visitor: Team;
+  detail: Object;
 };
 
 export type Games = {
@@ -53,7 +54,20 @@ function fromGame(game: Object): Game {
     quarter: game.quarter,
     home: fromTeam(game.home),
     visitor: fromTeam(game.visitor),
+    detail: {
+      loaded: false,
+      data: {},
+    },
   };
+}
+
+function updateGame(game: Game, detail: Object): Game {
+  game.status = detail.status;
+  game.progress = detail.progress;
+  game.quarter = detail.quarter;
+  game.detail.loaded = true;
+  game.detail.data = detail;
+  return game;
 }
 
 function games(state: Games = initialState, action: Action): Games {
@@ -64,6 +78,30 @@ function games(state: Games = initialState, action: Action): Games {
       live: action.games.live.map(fromGame),
       over: action.games.over.map(fromGame),
     };
+  } else if (action.type === 'LOADED_GAME_DETAIL') {
+    let newState = Object.assign({}, state);
+    let newGame;
+    for (let i = 0, length = newState.live.length; i < length; i++) {
+      let game = newState.live[i];
+      if (game.id === action.detail.id) {
+        newGame = updateGame(game, action.detail);
+        if (newGame.status === 'over') {
+          newState.live.splice(i, 1);
+          newState.over.push(newGame);
+        }
+        break;
+      }
+    }
+    if (!newGame) {
+      newState.over.some((game) => {
+        if (game.id === action.detail.id) {
+          updateGame(game, action.detail);
+          return true;
+        }
+        return false;
+      });
+    }
+    return newState;
   }
 
   return state;

@@ -117,15 +117,15 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  infoUnstart: {
-    top: 13,
-    fontSize: 22,
-  },
   infoProgress: {
     marginTop: 22,
     marginBottom: 3,
     color: 'white',
     fontSize: 10,
+  },
+  infoUnstart: {
+    top: 13,
+    fontSize: 22,
   },
   infoScorePanel: {
     flex: 1,

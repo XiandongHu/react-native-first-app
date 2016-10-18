@@ -13,6 +13,7 @@ var { connect } = require('react-redux');
 
 var NBATabsView = require('NBATabsView');
 var LoginModal = require('./login/LoginModal');
+var GameDetail = require('./tabs/today/GameDetail');
 
 var { switchTab } = require('./actions');
 
@@ -47,6 +48,14 @@ var NBANavigator = React.createClass({
         <LoginModal
           navigator={navigator}
           onLogin={route.callback}
+        />
+      );
+    } else if (route.detail) {
+      return (
+        <GameDetail
+          navigator={navigator}
+          date={route.date}
+          id={route.id}
         />
       );
     }

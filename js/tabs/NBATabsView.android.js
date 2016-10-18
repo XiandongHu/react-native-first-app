@@ -124,7 +124,7 @@ class NBATabsView extends React.Component {
   renderContent() {
     switch (this.props.tab) {
       case 'today':
-        return <TodayView />;
+        return <TodayView navigator={this.props.navigator} />;
       case 'schedule':
         return <ScheduleView navigator={this.props.navigator} />;
       case 'community':
