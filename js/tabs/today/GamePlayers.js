@@ -12,12 +12,13 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
-  ListView
+  ScrollView
 } from 'react-native';
 
+var CMListView = require('../../common/CMListView');
+
 class PlayerRow extends Component {
-  render () {
+  render() {
     const { player, last } = this.props;
 
     return (
@@ -101,34 +102,46 @@ PlayerRow.propTypes = {
 };
 
 class GamePlayers extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
-    this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-    };
+    (this: any).renderRow = this.renderRow.bind(this);
   }
 
-  componentDidMount() {
+  render() {
+    let players = Object.assign([], this.props.detail.players);
+    players.unshift({}); // unshift an empty object, use it as title row
+
+    return (
+      /**
+       * @TODO: I don't know what is the best practice to scroll both horizontal and vertical
+       * The method I used here may not adaptable
+       */
+      <View style={styles.container}>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          horizontal={true}
+          style={styles.scrollView}>
+          <CMListView
+            data={players}
+            needSeparator={false}
+            initialListSize={1}
+            pageSize={10}
+            renderRow={this.renderRow}
+            style={styles.listView} />
+        </ScrollView>
+      </View>
+    );
+  }
+
+  renderRow(player, _, i) {
+    const index = parseInt(i, 10);
     const { detail } = this.props;
-    this.updateDataSource(detail);
-  }
 
-  componentWillReceiveProps(props) {
-    const { detail } = props;
-    this.updateDataSource(detail);
-  }
-
-  updateDataSource(detail) {
-    const { dataSource } = this.state;
-    let rows = Object.assign([], detail.players);
-    rows.unshift({}); // unshift an empty object, use it as title row
-
-    this.setState({
-      dataSource: dataSource.cloneWithRows(rows),
-    });
+    if (index === 0) {
+      return this.renderTitle(index);
+    }
+    return (<PlayerRow player={player} key={index} last={index === detail.players.length} />);
   }
 
   renderTitle(index) {
@@ -151,38 +164,6 @@ class GamePlayers extends Component {
       </View>
     );
   }
-
-  renderRow(player, _, i) {
-    const index = parseInt(i, 10);
-    const { detail } = this.props;
-
-    if (index === 0) {
-      return this.renderTitle(index);
-    }
-    return (<PlayerRow player={player} key={index} last={index === detail.players.length} />);
-  }
-
-  render() {
-    const { dataSource } = this.state;
-    const horizontal = true;
-    return (
-      /**
-       * @TODO: I don't know what is the best practice to scroll both horizontal and vertical
-       * The method I used here may not adaptable
-       */
-      <View style={styles.container}>
-        <ScrollView
-          automaticallyAdjustContentInsets={false}
-          horizontal={horizontal}
-          style={styles.scrollView}>
-          <ListView
-            dataSource={dataSource}
-            renderRow={this.renderRow.bind(this)}
-            style={styles.listView} />
-        </ScrollView>
-      </View>
-    );
-  }
 }
 
 GamePlayers.propTypes = {
@@ -201,9 +182,9 @@ var styles = StyleSheet.create({
   listView: {
     flex: 1,
     flexDirection: 'column',
+    width: 800,
     marginBottom: 48,
     marginRight: 30,
-    width: 800,
   },
   titleRow: {
     height: 30,

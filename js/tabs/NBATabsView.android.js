@@ -10,6 +10,7 @@ var StyleSheet = require('StyleSheet');
 var Navigator = require('Navigator');
 var View = require('View');
 var Image = require('Image');
+var InteractionManager = require('InteractionManager');
 var { connect } = require('react-redux');
 
 var CMColors = require('../common/CMColors');
@@ -149,10 +150,13 @@ class NBATabsView extends React.Component {
   }
 
   onLogin() {
+    const { navigator } = this.props;
     this.refs.drawer.closeDrawer();
-    this.props.navigator.push({
-      login: true, // TODO: Proper route
-      callback: null,
+    InteractionManager.runAfterInteractions(() => {
+      navigator.push({
+        login: true, // TODO: Proper route
+        callback: null,
+      });
     });
   }
 

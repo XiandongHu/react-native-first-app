@@ -4,6 +4,8 @@
 
 'use strict';
 
+var InteractionManager = require('InteractionManager');
+
 import channel from '../channel';
 import type { ThunkAction } from './types';
 
@@ -12,7 +14,9 @@ module.exports = {
     return (dispatch) => {
       channel.loadGames(year, month, day)
         .then(data => {
-          dispatch(({type: 'LOADED_GAMES', games: data}: any));
+          InteractionManager.runAfterInteractions(() => {
+            dispatch(({type: 'LOADED_GAMES', games: data}: any));
+          });
         })
         .catch(err => console.error(err));
     };
@@ -22,7 +26,9 @@ module.exports = {
     return (dispatch) => {
       channel.loadGameDetail(year, month, day, id)
         .then(data => {
-          dispatch(({type: 'LOADED_GAME_DETAIL', detail: data}: any));
+          InteractionManager.runAfterInteractions(() => {
+            dispatch(({type: 'LOADED_GAME_DETAIL', detail: data}: any));
+          });
         })
         .catch(err => console.error(err));
     };
@@ -32,7 +38,9 @@ module.exports = {
     return (dispatch) => {
       channel.loadAllPlayers()
         .then(data => {
-          dispatch(({type: 'LOADED_ALL_PLAYERS', list: data}: any));
+          InteractionManager.runAfterInteractions(() => {
+            dispatch(({type: 'LOADED_ALL_PLAYERS', list: data}: any));
+          });
         })
         .catch(err => console.error(err));
     };

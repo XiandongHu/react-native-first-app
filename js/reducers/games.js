@@ -65,6 +65,8 @@ function updateGame(game: Game, detail: Object): Game {
   game.status = detail.status;
   game.progress = detail.progress;
   game.quarter = detail.quarter;
+  game.home.score = detail.home.score;
+  game.visitor.score = detail.visitor.score;
   game.detail.loaded = true;
   game.detail.data = detail;
   return game;

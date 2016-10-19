@@ -11,7 +11,7 @@ var moment = require('moment-timezone');
 
 var ListContainer = require('../../common/CMListContainer');
 var EmptyView = require('../../common/CMEmptyView');
-var ListView = require('../../common/CMListView');
+var CMListView = require('../../common/CMListView');
 var GameCell = require('./GameCell');
 
 var { loadGames } = require('../../actions');
@@ -40,7 +40,7 @@ class TodayView extends React.Component {
         selectedSegment={0}
         backgroundImage={require('./img/today-background.png')}
         backgroundColor={'#A8D769'}>
-        <ListView
+        <CMListView
           title="Games"
           data={games.live.concat(games.unstart).concat(games.over)}
           needSeparator={false}

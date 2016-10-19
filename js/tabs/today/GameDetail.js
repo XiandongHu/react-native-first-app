@@ -13,7 +13,8 @@ import {
   TouchableHighlight,
   ActivityIndicatorIOS,
   Platform,
-  PixelRatio
+  PixelRatio,
+  InteractionManager
 } from 'react-native';
 
 var { connect } = require('react-redux');
@@ -32,19 +33,26 @@ class GameDetail extends React.Component {
   };
 
   state: {
+    indicator: boolean;
     selectedIndex: number;
   };
+
+  _timer: any;
 
   constructor(props) {
     super(props);
 
     this.state = {
+      indicator: true,
       selectedIndex: 0,
     };
+
+    (this: any).onBackPress = this.onBackPress.bind(this);
+    (this: any).onSegmentChange = this.onSegmentChange.bind(this);
   }
 
   render() {
-    const { selectedIndex } = this.state;
+    const { indicator, selectedIndex } = this.state;
     const game = this.getCurrentGame();
 
     let gameProgress = '';
@@ -68,7 +76,7 @@ class GameDetail extends React.Component {
         {/* Navigation */}
         <Header
           title="Game Data"
-          leftItem={{title: 'Back', icon: require('../../login/img/x.png'), onPress: () => alert('Back button pressed!')}}
+          leftItem={{title: 'Back', icon: require('../../login/img/x.png'), onPress: this.onBackPress}}
           style={{backgroundColor: TeamMap[homeKey].color}}
         />
 
@@ -104,13 +112,13 @@ class GameDetail extends React.Component {
 
         {/* Switch */}
         <View style={styles.segment}>
-          <TouchableHighlight onPress={null} underlayColor="transparent" style={[styles.segmentPanel, styles[`segmentPanel${homeCss}`]]}>
+          <TouchableHighlight onPress={() => this.onSegmentChange(0)} underlayColor="transparent" style={[styles.segmentPanel, styles[`segmentPanel${homeCss}`]]}>
             <View style={styles.segmentPanelInner}>
               <Text style={[styles.segmentTeam, styles[`segmentTeam${homeCss}`]]}>{TeamMap[homeKey].city + ' ' + TeamMap[homeKey].team}</Text>
               <View style={homeCss === 'Active' ? {backgroundColor: TeamMap[homeKey].color, height: 4} : {opacity: 0}} />
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={null} underlayColor="transparent" style={[styles.segmentPanel, styles[`segmentPanel${visitorCss}`]]}>
+          <TouchableHighlight onPress={() => this.onSegmentChange(1)} underlayColor="transparent" style={[styles.segmentPanel, styles[`segmentPanel${visitorCss}`]]}>
             <View style={styles.segmentPanelInner}>
               <Text style={[styles.segmentTeam, styles[`segTeam${visitorCss}`]]}>{TeamMap[visitorKey].city + ' ' + TeamMap[visitorKey].team}</Text>
               <View style={visitorCss === 'Active' ? {backgroundColor: TeamMap[visitorKey].color, height: 4} : {opacity: 0}} />
@@ -119,7 +127,7 @@ class GameDetail extends React.Component {
         </View>
 
         {/* Data */}
-        {!game || !game.detail.loaded && Platform.OS === 'ios' &&
+        {indicator && Platform.OS === 'ios' &&
           <View style={styles.indicatorView}>
             <ActivityIndicatorIOS
               animating
@@ -129,12 +137,12 @@ class GameDetail extends React.Component {
             />
           </View>
         }
-        {!game || !game.detail.loaded && Platform.OS === 'android' &&
+        {indicator && Platform.OS === 'android' &&
           <View style={styles.indicatorView}>
             <Text>Loading...</Text>
           </View>
         }
-        {game && game.detail.loaded &&
+        {!indicator && game && game.detail.loaded &&
           <GamePlayers detail={selectedIndex === 0 ? game.detail.data.home : game.detail.data.visitor} />
         }
       </View>
@@ -142,8 +150,26 @@ class GameDetail extends React.Component {
   }
 
   componentDidMount() {
+    const game = this.getCurrentGame();
+    InteractionManager.runAfterInteractions(() => {
+      this.setState({
+        indicator: !game || !game.detail.loaded,
+      });
+    });
+
     var { date, id } = this.props;
     this.props.dispatch(loadGameDetail(date[0], date[1], date[2], id));
+  }
+
+  componentWillReceiveProps(props) {
+    const game = this.getCurrentGame();
+    this.setState({
+      indicator: !game || !game.detail.loaded,
+    });
+  }
+
+  componentWillUnmount() {
+    this._timer && clearTimeout(this._timer);
   }
 
   getCurrentGame(): Game {
@@ -158,6 +184,23 @@ class GameDetail extends React.Component {
     }
 
     return game;
+  }
+
+  onBackPress() {
+    this.props.navigator.pop();
+  }
+
+  onSegmentChange(index: number) {
+    this.setState({
+      indicator: true,
+      selectedIndex: index,
+    });
+
+    this._timer = setTimeout(() => {
+      this.setState({
+        indicator: false,
+      });
+    }, 500);
   }
 }
 
@@ -230,7 +273,7 @@ var styles = StyleSheet.create({
     marginTop: 7,
     marginLeft: 15,
     marginRight: 15,
-    color: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
   },
   segment: {
     flexDirection: 'row',
