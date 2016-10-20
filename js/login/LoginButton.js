@@ -19,7 +19,6 @@ class LoginButton extends React.Component {
     return (
       <CMButton
         style={[styles.button, this.props.style]}
-        type="bordered"
         icon={require('../login/img/f-logo.png')}
         caption="Log in"
         onPress={this.props.onPress}

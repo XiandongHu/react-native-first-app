@@ -13,7 +13,7 @@ var TouchableOpacity = require('TouchableOpacity');
 var CMColors = require('./CMColors');
 var { Text } = require('./CMText');
 
-//import LinearGradient from 'react-native-linear-gradient';
+import LinearGradient from 'react-native-linear-gradient';
 
 class CMButton extends React.Component {
   props: {
@@ -36,7 +36,7 @@ class CMButton extends React.Component {
     }
     let content;
     if (this.props.type === 'primary') {
-      /*content = (
+      content = (
         <LinearGradient
           start={[0.5, 1]} end={[1, 1]}
           colors={['#6A6AD5', '#6F86D9']}
@@ -46,7 +46,7 @@ class CMButton extends React.Component {
             {caption}
           </Text>
         </LinearGradient>
-      );*/
+      );
     } else {
       var border = this.props.type === 'bordered' && styles.border;
       content = (

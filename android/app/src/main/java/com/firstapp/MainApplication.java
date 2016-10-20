@@ -2,6 +2,7 @@ package com.firstapp;
 
 import android.app.Application;
 
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -22,21 +23,22 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
-                    new MainReactPackage()
+                    new MainReactPackage(),
+                    new LinearGradientPackage()
             );
         }
     };
+
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         Stetho.initializeWithDefaults(this);
-    }
-
-    @Override
-    public ReactNativeHost getReactNativeHost() {
-        return mReactNativeHost;
     }
 
 }
