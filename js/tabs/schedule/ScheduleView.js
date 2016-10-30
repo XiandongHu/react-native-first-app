@@ -13,7 +13,7 @@ var { createSelector } = require('reselect');
 
 var ListContainer = require('../../common/CMListContainer');
 var EmptyView = require('../../common/CMEmptyView');
-var ListView = require('../../common/CMListView');
+var CMListView = require('../../common/CMListView');
 var PlayerCell = require('./PlayerCell');
 var FilterPlayers = require('./filterPlayers');
 
@@ -45,13 +45,13 @@ class ScheduleView extends React.Component {
         backgroundColor={'#5597B8'}
         selectedSectionColor={'#51CDDA'}
         rightItem={filterItem}>
-        <ListView
+        <CMListView
           title="Players"
           data={this.props.players}
           renderEmptyList={this.renderEmptyList}
           renderRow={this.renderRow}
         />
-        <ListView
+        <CMListView
           title="Teams"
           data={this.props.players}
           renderEmptyList={this.renderEmptyList}

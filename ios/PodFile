@@ -1,0 +1,16 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'FirstApp' do
+  pod 'React', :subspecs => [
+    'Core',
+    'RCTActionSheet',
+    'RCTImage',
+    'RCTNetwork',
+    'RCTText',
+    'RCTWebSocket',
+    'RCTPushNotification',
+    'RCTLinkingIOS',
+    'RCTVibration',
+  ], :path => '../node_modules/react-native'
+   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+end

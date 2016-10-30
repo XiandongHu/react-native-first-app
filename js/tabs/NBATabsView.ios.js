@@ -40,7 +40,7 @@ class NBATabsView extends React.Component {
           onPress={this.onTabSelect.bind(this, 'today')}
           icon={require('./today/img/today-icon.png')}
           selectedIcon={require('./today/img/today-icon-active.png')}>
-          <TodayView />
+          <TodayView navigator={this.props.navigator} />
         </TabBarItemIOS>
         <TabBarItemIOS
           title="Schedule"
@@ -56,7 +56,7 @@ class NBATabsView extends React.Component {
           onPress={this.onTabSelect.bind(this, 'community')}
           icon={require('./community/img/community-icon.png')}
           selectedIcon={require('./community/img/community-icon-active.png')}>
-          <CommunityView />
+          <CommunityView navigator={this.props.navigator} />
         </TabBarItemIOS>
         <TabBarItemIOS
           title="Setting"
